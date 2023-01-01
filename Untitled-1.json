@@ -1,0 +1,66 @@
+// 20221225121303
+// http://localhost:3000/api/-6.91442/107.61129/500/amenity/school
+
+[
+  {
+    "type": "node",
+    "id": 31288438,
+    "lat": -6.9147418,
+    "lon": 107.614526,
+    "tags": {
+      "amenity": "school",
+      "name": "SMPN 5"
+    }
+  },
+  {
+    "type": "node",
+    "id": 32042245,
+    "lat": -6.9139948,
+    "lon": 107.6141919,
+    "tags": {
+      "amenity": "school",
+      "created_by": "JOSM",
+      "name": "SMPN 2"
+    }
+  },
+  {
+    "type": "node",
+    "id": 32042288,
+    "lat": -6.9125473,
+    "lon": 107.6149767,
+    "tags": {
+      "addr:city": "Kota Bandung",
+      "addr:housenumber": "8",
+      "addr:street": "Jalan Belitung",
+      "amenity": "school",
+      "name": "SMA Negeri 3 Bandung",
+      "website": "https://www.sman3bandung.sch.id/"
+    }
+  },
+  {
+    "type": "node",
+    "id": 4328163792,
+    "lat": -6.9133165,
+    "lon": 107.6104899,
+    "tags": {
+      "addr:city": "Bandung",
+      "addr:housenumber": "22",
+      "addr:street": "Jl. Merdeka",
+      "amenity": "school",
+      "name": "Sekolah Dasar Negeri Banjarsari 2"
+    }
+  },
+  {
+    "type": "node",
+    "id": 4328166911,
+    "lat": -6.9125111,
+    "lon": 107.6106132,
+    "tags": {
+      "addr:city": "Bandung",
+      "addr:housenumber": "24",
+      "addr:street": "Jl Merdeka",
+      "amenity": "school",
+      "name": "Tk Sd Smp Smu Santa Angela"
+    }
+  }
+]
