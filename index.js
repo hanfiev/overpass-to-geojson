@@ -61,10 +61,10 @@ app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
       delete data[i].timestamp
       delete data[i].distance
     }
-    // generate buffer area and push it to data
-    var centerPoint = point([parseFloat(lon),parseFloat(lat)]);
-    var area = buffer(centerPoint, radius*0.001, {units: 'kilometers'});
-    data.push(area)
+    // // generate buffer area and push it to data
+    // var centerPoint = point([parseFloat(lon),parseFloat(lat)]);
+    // var area = buffer(centerPoint, radius*0.001, {units: 'kilometers'});
+    // data.push(area)
 
     let geojson = {"type": "FeatureCollection", "features": data}
     res.send(geojson);
