@@ -94,9 +94,9 @@ app.get('/geojson/:lat/:lon/:radius/:key/:value', async (req, res) => {
     data = data.elements
     
     // calculate distance
-    var from = point([lat,lon]);
+    var from = point([lon,lat]);
     for(i=0; i<data.length; i++){
-      var to = point([data[i].lat, data[i].lon]);
+      var to = point([data[i].lon, data[i].lat]);
       data[i].distance = distance(from, to);
     }
 
