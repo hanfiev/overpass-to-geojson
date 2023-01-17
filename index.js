@@ -9,20 +9,20 @@ const buffer = require('@turf/buffer');
 
 app.use(cors())
 
-var lat,lon,radius,key,value
+var lat,lng,radius,key,value
 var request = require('request');
 
 //generate overpass api query
-app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
+app.get('/api/:lat/:lng/:radius/:key/:value', async (req, res) => {
   lat = req.params.lat
-  lon = req.params.lon
+  lng = req.params.lng
   radius = req.params.radius
   key = req.params.key
   value = req.params.value
 
   var query = `[out:json];
   (
-    node["${key}"~"${value}"](around:${radius},${lat}, ${lon});
+    node["${key}"~"${value}"](around:${radius},${lat}, ${lng});
   );
   out center;`
 
@@ -34,9 +34,9 @@ app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
     data = data.elements
     
     // calculate distance
-    var from = point([lat,lon]);
+    var from = point([lng,lat]);
     for(i=0; i<data.length; i++){
-      var to = point([data[i].lat, data[i].lon]);
+      var to = point([data[i].lng, data[i].lat]);
       data[i].distance = distance(from, to);
     }
 
@@ -48,10 +48,10 @@ app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
       data[i].properties.distance = data[i].distance
       data[i].geometry = {
         "type": "Point",
-        "coordinates": [data[i].lon, data[i].lat]
+        "coordinates": [data[i].lng, data[i].lat]
       }
       delete data[i].lat
-      delete data[i].lon
+      delete data[i].lng
       delete data[i].tags
       delete data[i].id
       delete data[i].version
@@ -62,7 +62,7 @@ app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
       delete data[i].distance
     }
     // // generate buffer area and push it to data
-    // var centerPoint = point([parseFloat(lon),parseFloat(lat)]);
+    // var centerPoint = point([parseFloat(lng),parseFloat(lat)]);
     // var area = buffer(centerPoint, radius*0.001, {units: 'kilometers'});
     // data.push(area)
 
@@ -73,16 +73,16 @@ app.get('/api/:lat/:lon/:radius/:key/:value', async (req, res) => {
 
 })
 
-app.get('/geojson/:lat/:lon/:radius/:key/:value', async (req, res) => {
+app.get('/geojson/:lat/:lng/:radius/:key/:value', async (req, res) => {
   lat = req.params.lat
-  lon = req.params.lon
+  lng = req.params.lng
   radius = req.params.radius
   key = req.params.key
   value = req.params.value
 
   var query = `[out:json];
   (
-    node["${key}"~"${value}"](around:${radius},${lat}, ${lon});
+    node["${key}"~"${value}"](around:${radius},${lat}, ${lng});
   );
   out center;`
 
@@ -94,9 +94,9 @@ app.get('/geojson/:lat/:lon/:radius/:key/:value', async (req, res) => {
     data = data.elements
     
     // calculate distance
-    var from = point([lon,lat]);
+    var from = point([lng,lat]);
     for(i=0; i<data.length; i++){
-      var to = point([data[i].lon, data[i].lat]);
+      var to = point([data[i].lng, data[i].lat]);
       data[i].distance = distance(from, to);
     }
 
@@ -108,10 +108,10 @@ app.get('/geojson/:lat/:lon/:radius/:key/:value', async (req, res) => {
       data[i].properties.distance = data[i].distance
       data[i].geometry = {
         "type": "Point",
-        "coordinates": [data[i].lon, data[i].lat]
+        "coordinates": [data[i].lng, data[i].lat]
       }
       delete data[i].lat
-      delete data[i].lon
+      delete data[i].lng
       delete data[i].tags
       delete data[i].id
       delete data[i].version
@@ -122,7 +122,7 @@ app.get('/geojson/:lat/:lon/:radius/:key/:value', async (req, res) => {
       delete data[i].distance
     }
     // generate buffer area and push it to data
-    var centerPoint = point([parseFloat(lon),parseFloat(lat)]);
+    var centerPoint = point([parseFloat(lng),parseFloat(lat)]);
     var area = buffer(centerPoint, radius*0.001, {units: 'kilometers'});
     data.push(area)
 
